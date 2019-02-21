@@ -52,7 +52,7 @@ void testNumbers() {
   print(number.isNegative); // false
   print((-1).isNegative); // true
   print(0.isNegative); // false
-  
+
   // 绝对值
   print((-10).abs()); // 10
   // 下面俩方法继承自 num 类型
@@ -127,6 +127,45 @@ void testString() {
   // const validConstString = '$aConstNum $aConstBool $aConstString $aConstList';
   // print(validConstString); // 0 true a constant string [1, 2, 3]
 // const invalidConstString = '$aNum $aBool $aString $aConstList'; // Error: Not a constant expression.
+
+  // 测试 String API
+  const testStr = 'hello world';
+  // 获取长度
+  print(testStr.length);
+
+  // 判断是否为空
+  print(testStr.isEmpty); // false
+  print(testStr.isNotEmpty); // true
+
+  // 除空
+  assert('  middle  '.trim() == 'middle');
+  assert('  lyr'.trimLeft() == 'lyr');
+  assert('ytj '.trimRight() == 'ytj');
+
+  // 取子串
+  print(testStr.substring(1));
+  print(testStr.substring(0, 5));
+
+  // 返回 utf-16 代码单元的码值
+  print('A'.codeUnitAt(0)); // 65
+  print(testStr.codeUnits); // [104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100]
+
+  // 判断内容
+  print(testStr.contains('world')); // true
+  print(testStr.startsWith('hell')); // true
+  print(testStr.endsWith('ddd')); // false
+
+  // 和下标有关的
+  print(testStr.indexOf('wor')); // 6
+  print('YuTengjing lyr dsy lyr'.lastIndexOf('lyr')); // 19
+
+  // 修改字符串的
+  print('11'.padLeft(4, '0')); // 0011
+  print('password'.padRight(18, '*')); // password**********
+  print('Dart is a awful language'.replaceAll('awful', 'awesome')); // Dart is a awesome language
+  
+  // 拆分
+  print('Miscrosoft, Google, IBM'.split(', ')); // [Miscrosoft, Google, IBM]
 }
 
 // Booleans 类型
@@ -156,9 +195,8 @@ void testBoolean() {
   print(1.isNaN); // false
 }
 
-
 void main() {
-  testNumbers();
-  // testString();
+  // testNumbers();
+  testString();
   // testBoolean();
 }
