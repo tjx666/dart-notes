@@ -10,6 +10,40 @@
  */
 
 // Numbers 数字类
+void main() {
+  // testNumbers();
+  testString();
+  // testBoolean();
+}
+
+// String 类型
+void testBoolean() {
+  // 在 Dart 所有的对象中,类型为 bool 的只有 true/false, 其实也就是运用了单例的设计模式
+  // Dart 是类型安全的语言, 不像 javascript 在需要一个 bool 类型时, 会自动将传的非 bool 值自动转换成 bool 类型
+  // if (1) { // A value of type 'int' can't be assigned to a variable of type 'bool'.
+  //   print('...');
+  // }
+
+  // Check for an empty string.
+  var fullName = '';
+  assert(fullName.isEmpty);
+
+  // Check for zero.
+  var hitPoints = 0;
+  assert(hitPoints <= 0);
+
+  // Check for null.
+  var unicorn;
+  assert(unicorn == null);
+
+  // Check for NaN.
+  var iMeantToDoThis = 0 / 0;
+  assert(iMeantToDoThis.isNaN);
+
+  print(1.isNaN); // false
+}
+
+// Booleans 类型
 /**
  * 主要包括两种类型, int 和 double, 即整形和浮点型, 两者都继承自 num 类型
  * int 类型的长度是不确定的, 在 Dart 虚拟机上是  -263 to 263 - 1, 编译为 javascript 时 253 to 253 - 1
@@ -74,7 +108,6 @@ void testNumbers() {
   print(5.5.clamp(5, 8));
 }
 
-// String 类型
 void testString() {
   // Dart 中字符串既可以用单引号也可以用双引号
   var s1 = 'Single quotes work well for string literals.';
@@ -126,10 +159,13 @@ void testString() {
   // Dart 插件有错误提示, 但是运行是非常正常的运行了, 有点异常信息都没有
   // const validConstString = '$aConstNum $aConstBool $aConstString $aConstList';
   // print(validConstString); // 0 true a constant string [1, 2, 3]
-// const invalidConstString = '$aNum $aBool $aString $aConstList'; // Error: Not a constant expression.
+  // const invalidConstString = '$aNum $aBool $aString $aConstList'; // Error: Not a constant expression.
 
   // 测试 String API
   const testStr = 'hello world';
+
+  // 可以通过下标访问 dart 字符串中的字符
+
   // 获取长度
   print(testStr.length);
 
@@ -166,37 +202,4 @@ void testString() {
   
   // 拆分
   print('Miscrosoft, Google, IBM'.split(', ')); // [Miscrosoft, Google, IBM]
-}
-
-// Booleans 类型
-void testBoolean() {
-  // 在 Dart 所有的对象中,类型为 bool 的只有 true/false, 其实也就是运用了单例的设计模式
-  // Dart 是类型安全的语言, 不像 javascript 在需要一个 bool 类型时, 会自动将传的非 bool 值自动转换成 bool 类型
-  // if (1) { // A value of type 'int' can't be assigned to a variable of type 'bool'.
-  //   print('...');
-  // }
-
-  // Check for an empty string.
-  var fullName = '';
-  assert(fullName.isEmpty);
-
-  // Check for zero.
-  var hitPoints = 0;
-  assert(hitPoints <= 0);
-
-  // Check for null.
-  var unicorn;
-  assert(unicorn == null);
-
-  // Check for NaN.
-  var iMeantToDoThis = 0 / 0;
-  assert(iMeantToDoThis.isNaN);
-
-  print(1.isNaN); // false
-}
-
-void main() {
-  // testNumbers();
-  testString();
-  // testBoolean();
 }
