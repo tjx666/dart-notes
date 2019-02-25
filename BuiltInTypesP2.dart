@@ -18,6 +18,9 @@ void testLists() {
   // 和 Java 以及 js 一样, 可以通过 length 访问 List 长度
   print(ls.length);
 
+  // 不能越界访问
+  // print(ls[10]); // RangeError (index): Invalid value: Not in range 0..3, inclusive: 10
+
   // 定义一个常量列表
   final constantList = const ['a', 'b', 'c'];
 
@@ -120,7 +123,7 @@ void testRunes() {
 // #bar
 // Symbol literals are compile-time constants.
 void main() {
-  // testLists();
+  testLists();
   // testMap();
   // testRunes();
 
