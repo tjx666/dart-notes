@@ -36,13 +36,13 @@ void testArithmetric() {
 }
 
 // --------------------------- 相等运算符和关系运算符 -----------------------------------
-// To test whether two objects x and y represent the same thing, use the == operator. 
-// (In the rare case where you need to know whether two objects are the exact same object, 
+// To test whether two objects x and y represent the same thing, use the == operator.
+// (In the rare case where you need to know whether two objects are the exact same object,
 // use the identical() function instead.) Here’s how the == operator works:
 
 // If x or y is null, return true if both are null, and false if only one is null.
 
-// Return the result of the method invocation x.==(y). 
+// Return the result of the method invocation x.==(y).
 // (That’s right, operators such as == are methods that are invoked on their first operand.
 //  You can even override many operators, including ==, as you’ll see in Overridable operators.)
 void testEqualityAndrelationalOperators() {
@@ -67,11 +67,141 @@ void testEqualityAndrelationalOperators() {
   print(666 <= 999); // true
   // 测试一个别的语言常见的错误写法, 好像目前我学过的语言里面只有 python 可以
   double goldenRatio = 0.618;
-  // print(0.6 < goldenRatio < 1); // Error: An equality expression can't be an operand of another equality expression.  
+  // print(0.6 < goldenRatio < 1); // Error: An equality expression can't be an operand of another equality expression.
+}
+
+// ------------------------ 测试类型 --------------------------------
+class Father {
+  String name;
+}
+
+class Son extends Father {
+  int grade;
+}
+
+void testType() {
+  // 使用 is 来判断左边的对象是否是右侧类的实例或实现了接口
+  print('This is a string' is String); // => true
+  // is! 和 is 相反, 判断不是右侧类的实例且没有实现了接口
+  print(666 is! num); // => false
+
+  // as 用来类型转换的, as 仅当你认为左侧对象确实是右侧类型时使用, 否则会抛异常
+  Father f = Son();
+  print((f as Son).grade);
+  // ('aaa' as Son).grade; // type 'String' is not a subtype of type 'Son' in type cast
+}
+
+// -------------------------- 赋值运算符 ---------------------------------
+void testAssignmentOperator() {
+  // = 就是赋值运算符
+  int integer = 666;
+
+  // 类似于 js 中的设置默认值的 hack 方法 v = v || defaultValue.
+  // dart 中有 ??=, 那么设置默认值可以写成 v ??= defaultValue
+  // ??= 操作符的功能就是当左侧对象不为 null 时, 将右侧的值赋值给左侧
+  void printName([String name]) {
+    name ??= 'lyreal666';
+    print(name);
+  }
+
+  printName(); // lyreal666
+  printName('htt'); // htt
+
+  int age = 22;
+  age ??= 21;
+  print(age); // 22
+
+  // 复合赋值运算符
+  int res = 10;
+  res ~/= 3;
+  print(res); // 3
+}
+
+// --------------------------- 逻辑运算符 -----------------------------
+void testLogicalOperators() {
+  // 逻辑运算符就是 true / false 作为操作数的运算符
+  print(!false); // true
+  print(false || true); // true
+  print(true && false); // false
+}
+
+void testBitOperators() {
+  final value = 0x22;
+  final bitmask = 0x0f;
+
+  assert((value & bitmask) == 0x02); // AND
+  assert((value & ~bitmask) == 0x20); // AND NOT
+  assert((value | bitmask) == 0x2f); // OR
+  assert((value ^ bitmask) == 0x2d); // XOR
+  assert((value << 4) == 0x220); // Shift left
+  assert((value >> 4) == 0x02); // Shift right
+}
+
+// ----------------------- 条件运算符 ---------------------------
+void testConditionOperators() {
+  // 不用条件运算符我们可能会用 if 语句
+  String playerName1(String name) {
+    if (name != null) {
+      return name;
+    } else {
+      return 'Guest';
+    }
+  }
+
+  // 使用 3 元条件运算符可以这样
+  String playerName2(String name) => name == null ? 'Guest' : name;
+
+  // 使用二元条件运算符, 可以用来给一个变量设默认值
+  String playerName3(String name) => name ?? 'Guest';
+}
+
+// ------------------------- 级联表示法 ----------------------------------
+// 级联表示法, 使用 .. 对一个对象多次操作, 严格来说 .. 操作符并不是一个操作符, 只是一个语法糖
+class Node {
+  Map<String, String> style;
+  List<Node> children;
+  double clientHeight;
+  double clientWidth;
+  void addListener(String eventString, Function callback) {}
+}
+
+void testCascadeNotation() {
+  Node node = Node()
+    ..clientHeight = 200
+    ..clientWidth = 50
+    ..addListener('click', () => {})
+    ..style = {'backgroundColor': 'red'};
+
+  // 级联也可以嵌套, 下面时一个例子
+  // final addressBook = (AddressBookBuilder()
+  //     ..name = 'jenny'
+  //     ..email = 'jenny@example.com'
+  //     ..phone = (PhoneNumberBuilder()
+  //           ..number = '415-555-0100'
+  //           ..label = 'home')
+  //         .build())
+  //   .build();
+
+  // 级联表示法必须跟在一个对象后面, 下面的例子是一个错误的用法, sb.write('foo') 返回的是 void
+  // var sb = StringBuffer();
+  // sb.write('foo')
+  //   ..write('bar'); // Error: method 'write' isn't defined for 'void'.
+}
+
+// -------------------------- 其它操作符 ------------------------------
+void testOtherOperators() {
+  // 这里只谈 ?. 成员访问符
+  Node node;
+  print(node?.clientHeight); // => null
+  // print(node.clientHeight); // NoSuchMethodError: The getter 'clientHeight' was called on null.
 }
 
 void main() {
   // testArithmetric();
-  testEqualityAndrelationalOperators();
-  
+  // testEqualityAndrelationalOperators();
+  // testType();
+  // testAssignmentOperator();
+  // testLogicalOperators();
+  // testConditionOperators();
+  testOtherOperators();
 }
