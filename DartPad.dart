@@ -1,3 +1,14 @@
+class Student {
+  String name;
+}
+
 void main() {
-  print('abcd'[0]);
+  const List<String> ls = [
+    'a',
+    'b',
+    'c'
+  ];
+
+  const List<Student> students = [
+  ];
 }
