@@ -20,7 +20,7 @@ class DOMElement {
   DOMElement(this.width, this.height);
 }
 
-// 下面这个是官方文档的标准写法
+// 下面这个是官方文档的标准写法, 可以看到还可以对带泛型的函数声明别名
 typedef Compare<T> = int Function(T a, T b);
 int sort(int a, int b) => a - b;
 
