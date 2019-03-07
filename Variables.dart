@@ -8,6 +8,7 @@ class Student {
 }
 
 main() {
+  // ------------------- var --------------------------
   // 使用 var 可以让dart 编译器自动推断变量的类型
   var name = 'YuTengjing';
 
@@ -22,13 +23,16 @@ main() {
   int num;
   assert(num == null);
 
+  // ----------------------- final ------------------------
   // Dart 中的 final 和 const
   final lover = 'lyr';
   // lover = 'other'; // Error: Setter not found: 'lover'.
   final stu = new Student();
   // 说明 final 修饰的变量和 java 一样只是不能修改变量的引用
   stu.name = 'YuTengjing';
+  
 
+  // ----------------------- const ---------------------------
   // const 在 Dart 中既可以修饰变量，也可以修饰值， 表示一个编译时常量，或者不变值
   const birthday = '11.11';
   // const 修饰的变量，隐式的被 final 修饰
@@ -48,4 +52,7 @@ main() {
 
   assert(getList() == getList());
   assert([1, 2, 3] == [1, 2, 3]);
+
+
+  //
 }
